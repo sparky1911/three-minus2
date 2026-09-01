@@ -1,0 +1,16 @@
+# Go
+api/api
+api/*.db
+api/*.db-journal
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Models — 400MB+, regenerate with optimum-cli
+moderation/models/
+
+# Env
+.env

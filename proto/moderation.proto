@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package moderation;
+
+option go_package = "github.com/you/moderation-demo/api/pb;pb";
+
+service Moderation {
+  rpc Moderate(ModerateRequest) returns (Verdict);
+}
+
+message ModerateRequest {
+  string comment_id = 1;
+  string text       = 2;
+  string author_id  = 3;
+}
+
+message Verdict {
+  string   comment_id = 1;
+  Decision decision   = 2;
+  float    score      = 3;
+  string   stage      = 4;
+}
+
+enum Decision {
+  DECISION_UNSPECIFIED = 0;
+  APPROVE              = 1;
+  REJECT               = 2;
+  REVIEW               = 3;
+}

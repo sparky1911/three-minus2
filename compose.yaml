@@ -1,0 +1,30 @@
+services:
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    environment:
+      MODERATION_ADDR: moderation:50051
+      DB_PATH: /data/moderation.db
+    volumes:
+      - apidata:/data
+    depends_on:
+      - moderation
+
+  moderation:
+    build: ./moderation
+    environment:
+      OLLAMA_URL: http://ollama:11434
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama:/root/.ollama
+
+volumes:
+  apidata:
+  ollama:
